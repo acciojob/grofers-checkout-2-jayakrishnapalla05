@@ -1,20 +1,14 @@
-//your code here
-document.addEventListener('DOMContentLoaded', function () {
-  // Get all the price elements
-  const prices = document.querySelectorAll('[data-ns-test="prices"]');
+var table = document.querySelector('table');
+ var lastRow = document.createElement('tr');
+ var prices = document.querySelectorAll('[data-ns-test=price]');
+ let sum = 0;
+ for(let i = 0; i < prices.length; i++) {
+  sum += parseInt(prices[i].textContent);
+ }
+ var child = document.createElement("td");
+ child.setAttribute('data-ns-test', 'grandTotal');
 
-  // Calculate the total price
-  let totalPrice = 0;
-  prices.forEach(function (priceElement) {
-    totalPrice += parseFloat(priceElement.textContent);
-  });
 
-  // Create the row for displaying the total price
-  const table = document.getElementById('grocery-list');
-  const newRow = document.createElement('tr');
-  const totalCell = document.createElement('td');
-  totalCell.setAttribute('colspan', '2');
-  totalCell.textContent = 'Total Price: $' + totalPrice.toFixed(2);
-  newRow.appendChild(totalCell);
-  table.appendChild(newRow);
-});
+ child.textContent = sum;
+ lastRow.appendChild(child);
+ table.appendChild(lastRow);
